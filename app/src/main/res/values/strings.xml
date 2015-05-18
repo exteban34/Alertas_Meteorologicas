@@ -8,9 +8,11 @@
     <string name="generar_alerta">Generar tu Alerta </string>
     <string name="temperatura">Temperatura:  </string>
     <string name="humedad">Humedad Relativa: </string>
-    <string name="velocidad">Velocidad del Viento:</string>
+    <string name="luz">Intensidad de la luz:</string>
     <string name="registrar_alerta">Registrar una Alerta nueva </string>
     <string name="registrar">Registrar </string>
     <string name="ver_alertas">Ver tus Alertas </string>
+    <string name="to"> To </string>
+
 
 </resources>

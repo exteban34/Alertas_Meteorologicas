@@ -46,11 +46,22 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
-                android:layout_width="100dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText3"
+                android:id="@+id/edit_text_temp_bajo"
                 android:layout_column="1"
                 android:inputType="number"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/to"
+                android:id="@+id/textView2" />
+
+            <EditText
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_text_temp_alto" />
 
         </TableRow>
 
@@ -69,9 +80,20 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText"
+                android:id="@+id/edit_text_humed_bajo"
                 android:layout_column="1"
                 android:inputType="number"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/to"
+                android:id="@+id/textView3" />
+
+            <EditText
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_text_humed_alto" />
 
         </TableRow>
 
@@ -84,15 +106,26 @@
                 android:id="@+id/TextView04"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/velocidad"
+                android:text="@string/luz"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText2"
+                android:id="@+id/edit_text_luz_bajo"
                 android:layout_column="1"
                 android:inputType="number"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/to"
+                android:id="@+id/textView4" />
+
+            <EditText
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_text_luz_alto" />
 
         </TableRow>
 

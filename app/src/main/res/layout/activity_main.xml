@@ -13,7 +13,9 @@
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_marginTop="47dp"
-        android:textColor="#ff1b1aff" />
+        android:textColor="#ff1b1aff"
+        android:autoText="false"
+        android:elegantTextHeight="false" />
 
     <Button
         android:layout_width="wrap_content"
