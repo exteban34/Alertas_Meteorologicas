@@ -6,15 +6,16 @@ import java.util.Date;
  * Created by esteban on 28/04/2015.
  */
 public class Alerta {
+    private int id;
     private int temperaturaBajo;
     private int temperaturaAlto;
     private int humedadBajo;
     private int humedadAlto;
     private int luzBajo;
     private int luzAlto;
-    private Date fecha;
+    private String fecha;
 
-    public Alerta(int temperaturaBajo, int temperaturaAlto, int humedadBajo, int humedadAlto, int luzBajo, int luzAlto, Date fecha) {
+    public Alerta(int temperaturaBajo, int temperaturaAlto, int humedadBajo, int humedadAlto, int luzBajo, int luzAlto, String fecha) {
         this.temperaturaBajo = temperaturaBajo;
         this.temperaturaAlto = temperaturaAlto;
         this.humedadBajo = humedadBajo;
@@ -24,7 +25,7 @@ public class Alerta {
         this.fecha = fecha;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
@@ -76,7 +77,15 @@ public class Alerta {
         this.luzAlto = luzAlto;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
