@@ -15,7 +15,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="@string/registrar"
-        android:onClick="regresar" />
+        android:onClick="registrar" />
 
     <TextView
         android:id="@+id/textViewAlerta"
@@ -61,7 +61,8 @@
             <EditText
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/edit_text_temp_alto" />
+                android:id="@+id/edit_text_temp_alto"
+                android:inputType="number" />
 
         </TableRow>
 
@@ -93,7 +94,8 @@
             <EditText
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/edit_text_humed_alto" />
+                android:id="@+id/edit_text_humed_alto"
+                android:inputType="number" />
 
         </TableRow>
 
@@ -125,7 +127,8 @@
             <EditText
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/edit_text_luz_alto" />
+                android:id="@+id/edit_text_luz_alto"
+                android:inputType="number" />
 
         </TableRow>
 

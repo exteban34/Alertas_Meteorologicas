@@ -1,5 +1,6 @@
 package com.edu.udea.sistemas.esteban.alertas_meteorologicas.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -30,15 +31,28 @@ public class DBAdapter {
     static final String LUZ_ALTO = "luz_alto";
     static final String FECHA_ALERTA = "fecha";
 
-    static final String DATABASE_CREATE = "create table(id integer primary key autoincrement, " +
-            "temp_bajo text" +
-            "temp_alto text" +
-            "humed_bajo text" +
-            "humed_alto text" +
-            "luz_bajo text" +
-            "luz_alto text" +
-            "fecha text" +
-            ")";
+    static final String TABLA_MEDICIONES="Mediciones";
+    static final String ID_MEDICION="id";
+    static final String TEMP_MEDICION="temperatura";
+    static final String LUZ_MEDICION="luz";
+    static final String HUMEDAD_MEDICION="humedad";
+    static final String FECHA_MEDICION="fecha";
+
+    static final String DATABASE_CREATE = "CREATE TABLE [Alertas] (id integer PRIMARY KEY AUTOINCREMENT UNIQUE," +
+            "temp_bajo integer," +
+            "temp_alto integer," +
+            "humed_bajo integer," +
+            "humed_alto integer," +
+            "luz_bajo integer," +
+            "luz_alto integer," +
+            "fecha text);"
+
+            +"CREATE TABLE [Mediciones] (id integer PRIMARY KEY AUTOINCREMENT UNIQUE," +
+            "temperatura integer," +
+            "humedad integer," +
+            "luz integer," +
+            "fecha text)";
+
     final Context context;
     DatabaseHelper DBHelper;
     SQLiteDatabase db;
@@ -105,6 +119,9 @@ public class DBAdapter {
 
     }
 
+    /**
+     * obtener una alerta
+     */
     public Alerta getAlerta(int id) throws SQLException{
 
         Cursor c =db.query(TABLA_ALERTAS, new String[] {TEMP_BAJO,TEMP_ALTO,
@@ -112,6 +129,7 @@ public class DBAdapter {
         }, ID_ALERTA + "=" + id, null, null, null, null);
         if (c != null) {
             c.moveToFirst();
+
         }
         alerta = new Alerta(Integer.valueOf(c.getString(0)),Integer.valueOf(c.getString(1)),
                 Integer.valueOf(c.getString(2)),Integer.valueOf(c.getString(3)),Integer.valueOf(c.getString(4)),
@@ -120,6 +138,40 @@ public class DBAdapter {
         return alerta;
     }
 
+    /**
+     * insertar alerta en la base de datos
+     *
+     */
+    public void insertarAlerta(int id,int temp_bajo, int temp_alto,int humed_bajo,
+                               int humed_alto, int luz_bajo, int luz_alto,String fecha) {
+        ContentValues initialValues = new ContentValues();
+        initialValues.put(ID_ALERTA, id);
+        initialValues.put(TEMP_BAJO, temp_bajo);
+        initialValues.put(TEMP_ALTO, temp_alto);
+        initialValues.put(HUMED_BAJO, humed_bajo);
+        initialValues.put(HUMED_ALTO, humed_alto);
+        initialValues.put(LUZ_BAJO, luz_bajo);
+        initialValues.put(LUZ_ALTO, luz_alto);
+        initialValues.put(FECHA_ALERTA,fecha);
+        db.insert(TABLA_ALERTAS, null, initialValues);
+    }
 
+    // ---deletes a particular alerta---
+    public boolean eliminarAlerta(int id) {
+        return db.delete(TABLA_ALERTAS, ID_ALERTA + "=" + id, null) > 0;
+    }
 
+    public boolean editarAlerta(int id,int temp_bajo, int temp_alto,int humed_bajo,
+                               int humed_alto, int luz_bajo, int luz_alto,String fecha) {
+        ContentValues initialValues = new ContentValues();
+        initialValues.put(ID_ALERTA, id);
+        initialValues.put(TEMP_BAJO, temp_bajo);
+        initialValues.put(TEMP_ALTO, temp_alto);
+        initialValues.put(HUMED_BAJO, humed_bajo);
+        initialValues.put(HUMED_ALTO, humed_alto);
+        initialValues.put(LUZ_BAJO, luz_bajo);
+        initialValues.put(LUZ_ALTO, luz_alto);
+        initialValues.put(FECHA_ALERTA,fecha);
+        return db.update(TABLA_ALERTAS,initialValues,ID_ALERTA+"="+id,null)>0;
+    }
 }
