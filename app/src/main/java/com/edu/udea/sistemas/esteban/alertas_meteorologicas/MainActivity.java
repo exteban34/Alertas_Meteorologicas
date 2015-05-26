@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.edu.udea.sistemas.esteban.alertas_meteorologicas.db.DBAdapter;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -17,11 +19,13 @@ import java.io.OutputStream;
 
 public class MainActivity extends ActionBarActivity {
 
+   // DBAdapter db= new DBAdapter(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        try {
+
+       try {
             /**
              * Proceso para copiar la base de datos
              */
@@ -34,14 +38,16 @@ public class MainActivity extends ActionBarActivity {
                 // ---copy the db from the assets folder into
                 // the databases folder---
 
-                CopyDB(getBaseContext().getAssets().open("databaseAlertas.sqlite"),
-                        new FileOutputStream(destPath + "/alertasbd"));
+                CopyDB(getBaseContext().getAssets().open("alertasdb"),
+                        new FileOutputStream(destPath + "/alertbd"));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     public void clickRegistrarAlerta(View view){

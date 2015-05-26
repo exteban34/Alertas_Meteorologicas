@@ -17,8 +17,8 @@ import java.util.ArrayList;
  */
 public class DBAdapter {
 
-    static final String DATABASE_NOMBRE = "alertasdb";
-    static final int DATABASE_VERSION = 1;
+    static final String DATABASE_NOMBRE = "alertbd";
+    static final int DATABASE_VERSION = 2;
     static final String TAG = "DBAdapter";
 
     static final String TABLA_ALERTAS = "Alertas";
@@ -38,20 +38,31 @@ public class DBAdapter {
     static final String HUMEDAD_MEDICION="humedad";
     static final String FECHA_MEDICION="fecha";
 
-    static final String DATABASE_CREATE = "CREATE TABLE [Alertas] (id integer PRIMARY KEY AUTOINCREMENT UNIQUE," +
-            "temp_bajo integer," +
-            "temp_alto integer," +
-            "humed_bajo integer," +
-            "humed_alto integer," +
-            "luz_bajo integer," +
-            "luz_alto integer," +
-            "fecha text);"
+    static final String DATABASE_CREATE = "CREATE TABLE `Alertas` (\n" +
+            "\t`id`\tINTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
+            "\t`temp_bajo`\tINTEGER,\n" +
+            "\t`temp_alto`\tINTEGER,\n" +
+            "\t`humed_bajo`\tINTEGER,\n" +
+            "\t`humed_alto`\tINTEGER,\n" +
+            "\t`luz_bajo`\tINTEGER,\n" +
+            "\t`luz_alto`\tINTEGER,\n" +
+            "\t`fecha`\tTEXT\n" +
+            ");CREATE TABLE `Alertas` (\n" +
+            "\t`id`\tINTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
+            "\t`temp_bajo`\tINTEGER,\n" +
+            "\t`temp_alto`\tINTEGER,\n" +
+            "\t`humed_bajo`\tINTEGER,\n" +
+            "\t`humed_alto`\tINTEGER,\n" +
+            "\t`luz_bajo`\tINTEGER,\n" +
+            "\t`luz_alto`\tINTEGER,\n" +
+            "\t`fecha`\tTEXT\n" +
+            ");"
 
-            +"CREATE TABLE [Mediciones] (id integer PRIMARY KEY AUTOINCREMENT UNIQUE," +
-            "temperatura integer," +
-            "humedad integer," +
-            "luz integer," +
-            "fecha text)";
+            +"CREATE TABLE Mediciones (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," +
+            "temperatura INTEGER," +
+            "humedad INTEGER," +
+            "luz INTEGER," +
+            "fecha TEXT)";
 
     final Context context;
     DatabaseHelper DBHelper;
@@ -105,6 +116,7 @@ public class DBAdapter {
         }, null, null, null, null, null);
         ArrayList<Alerta> alertas = new ArrayList<Alerta>();
 
+
         if (c.moveToFirst()) {
             do {
                 alerta = new Alerta(Integer.valueOf(c.getString(0)),Integer.valueOf(c.getString(1)),
@@ -142,10 +154,9 @@ public class DBAdapter {
      * insertar alerta en la base de datos
      *
      */
-    public void insertarAlerta(int id,int temp_bajo, int temp_alto,int humed_bajo,
+    public void insertarAlerta(int temp_bajo, int temp_alto,int humed_bajo,
                                int humed_alto, int luz_bajo, int luz_alto,String fecha) {
         ContentValues initialValues = new ContentValues();
-        initialValues.put(ID_ALERTA, id);
         initialValues.put(TEMP_BAJO, temp_bajo);
         initialValues.put(TEMP_ALTO, temp_alto);
         initialValues.put(HUMED_BAJO, humed_bajo);
