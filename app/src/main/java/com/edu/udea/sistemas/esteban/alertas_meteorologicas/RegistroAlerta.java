@@ -52,6 +52,7 @@ public class RegistroAlerta extends Activity {
                 Integer.valueOf(edLuzAlto.getText().toString()),
                 "26/05/2015");
         db.close();
+        onBackPressed();
 
     }
 }

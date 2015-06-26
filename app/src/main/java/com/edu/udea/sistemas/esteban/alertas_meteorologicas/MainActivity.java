@@ -38,7 +38,7 @@ public class MainActivity extends ActionBarActivity {
                 // ---copy the db from the assets folder into
                 // the databases folder---
 
-                CopyDB(getBaseContext().getAssets().open("alertasdb"),
+                CopyDB(getBaseContext().getAssets().open("databaseAlertas"),
                         new FileOutputStream(destPath + "/alertbd"));
             }
         } catch (FileNotFoundException e) {

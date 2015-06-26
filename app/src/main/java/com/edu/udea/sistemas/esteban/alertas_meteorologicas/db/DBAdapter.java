@@ -82,7 +82,7 @@ public class DBAdapter {
         @Override
         public void onCreate(SQLiteDatabase db) {
             try {
-                //	db.execSQL(DATABASE_CREATE);
+              db.execSQL(DATABASE_CREATE);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
