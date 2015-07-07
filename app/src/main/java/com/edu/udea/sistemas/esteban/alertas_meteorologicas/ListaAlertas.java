@@ -39,10 +39,7 @@ public class ListaAlertas extends Activity {
             public void onEntrada(Object entrada, View view) {
                 if (entrada != null) {
                     alerta = (Alerta) entrada;
-                    TextView tvid = (TextView) view.findViewById(R.id.tvId);
-                    if (tvid != null){
-                        tvid.setText(alerta.getId());
-                    }
+
                     TextView tvtmp = (TextView) view.findViewById(R.id.tvTemp);
                     if (tvtmp != null){
                         tvtmp.setText(alerta.getTemperaturaBajo() + "  -  " + alerta.getTemperaturaAlto());

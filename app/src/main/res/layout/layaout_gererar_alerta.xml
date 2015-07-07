@@ -50,7 +50,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/edit_text_temp_bajo"
                 android:layout_column="1"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:maxLength="3"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -62,7 +63,8 @@
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/edit_text_temp_alto"
-                android:inputType="number" />
+                android:inputType="number"
+                android:maxLength="3"/>
 
         </TableRow>
 
@@ -83,7 +85,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/edit_text_humed_bajo"
                 android:layout_column="1"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:maxLength="2"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -95,7 +98,8 @@
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/edit_text_humed_alto"
-                android:inputType="number" />
+                android:inputType="number"
+                android:maxLength="3"/>
 
         </TableRow>
 
@@ -109,14 +113,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/luz"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/edit_text_luz_bajo"
                 android:layout_column="1"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:maxLength="4"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -128,7 +134,8 @@
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/edit_text_luz_alto"
-                android:inputType="number" />
+                android:inputType="number"
+                android:maxLength="4"/>
 
         </TableRow>
 

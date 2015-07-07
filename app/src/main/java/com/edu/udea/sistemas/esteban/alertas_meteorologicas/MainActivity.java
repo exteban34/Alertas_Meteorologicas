@@ -19,34 +19,11 @@ import java.io.OutputStream;
 
 public class MainActivity extends ActionBarActivity {
 
-   // DBAdapter db= new DBAdapter(this);
+    DBAdapter db= new DBAdapter(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-       try {
-            /**
-             * Proceso para copiar la base de datos
-             */
-            String destPath = "/data/data/" + getPackageName() + "/databases";
-            File f = new File(destPath);
-            if (!f.exists()) {
-                f.mkdirs();
-                f.createNewFile();
-
-                // ---copy the db from the assets folder into
-                // the databases folder---
-
-                CopyDB(getBaseContext().getAssets().open("databaseAlertas"),
-                        new FileOutputStream(destPath + "/alertbd"));
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -59,23 +36,6 @@ public class MainActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
-
-
-    public void CopyDB(InputStream inputStream, OutputStream outputStream)
-            throws IOException {
-        // ---copy 1K bytes at a time---
-        byte[] buffer = new byte[1024];
-
-        int length;
-
-        while ((length = inputStream.read(buffer)) > 0) {
-            outputStream.write(buffer, 0, length);
-
-        }
-
-        inputStream.close();
-        outputStream.close();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

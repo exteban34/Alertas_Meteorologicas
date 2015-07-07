@@ -15,62 +15,44 @@ import java.util.ArrayList;
 /**
  * Created by esteban on 18/05/2015.
  */
-public class DBAdapter {
+public class
+        DBAdapter {
 
-    static final String DATABASE_NOMBRE = "alertbd";
-    static final int DATABASE_VERSION = 2;
+    static final String DATABASE_NOMBRE ="myDB";
+    static final int DATABASE_VERSION = 1;
     static final String TAG = "DBAdapter";
 
-    static final String TABLA_ALERTAS = "Alertas";
+    static final String TABLA_ALERTAS = "alertas";
     static final String ID_ALERTA = "id";
     static final String TEMP_BAJO = "temp_bajo";
-    static final String TEMP_ALTO = "temp_bajo";
+    static final String TEMP_ALTO = "temp_alto";
     static final String HUMED_BAJO = "humed_bajo";
     static final String HUMED_ALTO = "humed_alto";
     static final String LUZ_BAJO = "luz_bajo";
     static final String LUZ_ALTO = "luz_alto";
     static final String FECHA_ALERTA = "fecha";
 
-    static final String TABLA_MEDICIONES="Mediciones";
-    static final String ID_MEDICION="id";
-    static final String TEMP_MEDICION="temperatura";
-    static final String LUZ_MEDICION="luz";
-    static final String HUMEDAD_MEDICION="humedad";
-    static final String FECHA_MEDICION="fecha";
 
-    static final String DATABASE_CREATE = "CREATE TABLE `Alertas` (\n" +
-            "\t`id`\tINTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
-            "\t`temp_bajo`\tINTEGER,\n" +
-            "\t`temp_alto`\tINTEGER,\n" +
-            "\t`humed_bajo`\tINTEGER,\n" +
-            "\t`humed_alto`\tINTEGER,\n" +
-            "\t`luz_bajo`\tINTEGER,\n" +
-            "\t`luz_alto`\tINTEGER,\n" +
-            "\t`fecha`\tTEXT\n" +
-            ");CREATE TABLE `Alertas` (\n" +
-            "\t`id`\tINTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
-            "\t`temp_bajo`\tINTEGER,\n" +
-            "\t`temp_alto`\tINTEGER,\n" +
-            "\t`humed_bajo`\tINTEGER,\n" +
-            "\t`humed_alto`\tINTEGER,\n" +
-            "\t`luz_bajo`\tINTEGER,\n" +
-            "\t`luz_alto`\tINTEGER,\n" +
-            "\t`fecha`\tTEXT\n" +
-            ");"
 
-            +"CREATE TABLE Mediciones (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," +
-            "temperatura INTEGER," +
-            "humedad INTEGER," +
-            "luz INTEGER," +
-            "fecha TEXT)";
+    static final String DATABASE_CREATE = "create table alertas ("
+            + "	id	integer primary key autoincrement,"
+            + "	temp_bajo	integer,"
+            + "	temp_alto	integer,"
+            + "	humed_bajo	integer,"
+            + "	humed_alto	integer,"
+            + "	luz_bajo	integer,"
+            + "	luz_alto	integer,"
+            + "	fecha	text"
+            + ");";
 
     final Context context;
     DatabaseHelper DBHelper;
     SQLiteDatabase db;
+
     private Alerta alerta=null;
 
-    public DBAdapter(Context context) {
-        this.context = context;
+    public DBAdapter(Context ctx) {
+        this.context = ctx;
         DBHelper = new DatabaseHelper(context);
     }
 
@@ -82,18 +64,18 @@ public class DBAdapter {
         @Override
         public void onCreate(SQLiteDatabase db) {
             try {
-              db.execSQL(DATABASE_CREATE);
+                db.execSQL(DATABASE_CREATE);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         }
+
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             Log.w(TAG, "Upgrading database from version " + oldVersion + " to "
                     + newVersion + ", which will destroy all old data");
-            db.execSQL("DROP TABLE IF EXISTS Alertas");
+            db.execSQL("DROP TABLE IF EXISTS contacts");
             onCreate(db);
         }
     }
