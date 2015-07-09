@@ -63,6 +63,10 @@ public class MainActivity extends ActionBarActivity {
                 Intent intent_ver_alertas=new Intent("com.edu.udea.sistemas.esteban.alertas_meteorologicas.ListaAlertas");
                 startActivity(intent_ver_alertas);
                 break;
+            case (R.id.ver_mediciones_menu_item):
+                Intent intent_ver_mediciones=new Intent("com.edu.udea.sistemas.esteban.alertas_meteorologicas.ListaMediciones");
+                startActivity(intent_ver_mediciones);
+                break;
             default:
                 break;
         }

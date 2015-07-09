@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.edu.udea.sistemas.esteban.alertas_meteorologicas" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,6 +24,15 @@
             android:screenOrientation="portrait" >
             <intent-filter >
                 <action android:name="com.edu.udea.sistemas.esteban.alertas_meteorologicas.ListaAlertas" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="Últimas Mediciones"
+            android:name="com.edu.udea.sistemas.esteban.alertas_meteorologicas.ListaMediciones"
+            android:screenOrientation="portrait" >
+            <intent-filter >
+                <action android:name="com.edu.udea.sistemas.esteban.alertas_meteorologicas.ListaMediciones" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
