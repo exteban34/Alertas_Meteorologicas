@@ -52,9 +52,21 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+
+        switch (id){
+
+            case (R.id.registrar_menu_item):
+                Intent intent_registrar=new Intent("com.edu.udea.sistemas.esteban.alertas_meteorologicas.RegistroAlerta");
+                startActivity(intent_registrar);
+                break;
+            case (R.id.ver_alertas_menu_item):
+                Intent intent_ver_alertas=new Intent("com.edu.udea.sistemas.esteban.alertas_meteorologicas.ListaAlertas");
+                startActivity(intent_ver_alertas);
+                break;
+            default:
+                break;
         }
+
 
         return super.onOptionsItemSelected(item);
     }
