@@ -10,6 +10,7 @@ public class Medicion {
     int humedad;
     String fecha;
 
+
     public Medicion(int id, int temperatura, int luz, int humedad, String fecha) {
         this.id = id;
         this.temperatura = temperatura;

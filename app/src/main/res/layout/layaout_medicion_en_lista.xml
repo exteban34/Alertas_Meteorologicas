@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/tvId" />
+        android:id="@+id/tvfechaMed" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Small Text"
-            android:id="@+id/tvTemp" />
+            android:id="@+id/tvTempMed" />
     </LinearLayout>
 
     <LinearLayout
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Small Text"
-            android:id="@+id/tvHmd" />
+            android:id="@+id/tvHmdMed" />
     </LinearLayout>
 
     <LinearLayout
@@ -67,6 +67,6 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Small Text"
-            android:id="@+id/tvLuz" />
+            android:id="@+id/tvLuzMed" />
     </LinearLayout>
 </LinearLayout>

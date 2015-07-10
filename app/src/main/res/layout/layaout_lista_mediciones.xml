@@ -13,7 +13,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ListView
-        android:id="@+id/listViewAlertas"
+        android:id="@+id/listViewMediciones"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
     </ListView>
