@@ -1,9 +1,11 @@
 package com.edu.udea.sistemas.esteban.alertas_meteorologicas.model;
 
+import java.io.Serializable;
+
 /**
  * Created by esteban on 20/05/2015.
  */
-public class Medicion {
+public class Medicion implements Serializable {
     int id;
     int temperatura;
     int luz;
