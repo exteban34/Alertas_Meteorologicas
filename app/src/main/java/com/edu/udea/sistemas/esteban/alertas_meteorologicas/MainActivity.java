@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.edu.udea.sistemas.esteban.alertas_meteorologicas.db.DBAdapter;
@@ -33,10 +34,13 @@ public class MainActivity extends ActionBarActivity {
     ProgressDialog pDialog;
     ArrayList<Medicion> mediciones= new ArrayList<>();
     Medicion medicion;
+    WebView webViewTemperatura;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        webViewTemperatura= (WebView) findViewById(R.id.webViewTemp);
+        webViewTemperatura.loadUrl("http://api.thingspeak.com/channels/44075/charts/1?width=450&height=260&results=60&dynamic=true");
 
     }
 

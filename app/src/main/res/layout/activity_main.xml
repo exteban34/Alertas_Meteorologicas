@@ -20,4 +20,12 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <WebView
+        android:layout_width="450dp"
+        android:layout_height="260dp"
+        android:id="@+id/webViewTemp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
