@@ -109,12 +109,12 @@ public class MainActivity extends ActionBarActivity {
                 int cantidad = jsonchanel.getInt("last_entry_id");
                 JSONArray jsonfeeds = jsonObject.getJSONArray("feeds");
 
-                for(int i =(cantidad-1) ; i >=(cantidad-5); i--){
+                for(int i =(jsonfeeds.length()-1) ; i >=(jsonfeeds.length()-5); i--){
                     jsonObject1=jsonfeeds.getJSONObject(i);
                     medicion = new Medicion(jsonObject1.getInt("entry_id"),
-                            jsonObject1.getInt("field1"),
-                            jsonObject1.getInt("field2"),
-                            jsonObject1.getInt("field3"),
+                            jsonObject1.getDouble("field1"),
+                            jsonObject1.getDouble("field2"),
+                            jsonObject1.getDouble("field3"),
                             jsonObject1.getString("created_at")
                     );
 

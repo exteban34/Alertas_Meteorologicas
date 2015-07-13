@@ -39,9 +39,7 @@ public class ListaMediciones extends Activity {
         lista= (ListView) findViewById(R.id.listViewMediciones);
         DataPass dw = (DataPass) getIntent().getSerializableExtra("mediciones");
         mediciones = dw.getMediciones();
-        Toast.makeText(
-                getApplicationContext(),"Medicion  "+mediciones.size()+"  "+mediciones.get(2).getLuz(),
-                Toast.LENGTH_LONG).show();
+
 
         lista.setAdapter(new Lista_Adaptador(this,R.layout.layaout_medicion_en_lista,mediciones) {
             @Override
@@ -51,19 +49,19 @@ public class ListaMediciones extends Activity {
                     TextView textViewFecha = (TextView) view.findViewById(R.id.textViewFechaMed);
                     if (textViewFecha != null){
                         textViewFecha.setText(medicion.getFecha());
-                    }/**
+                    }
                     TextView textViewTemp = (TextView) view.findViewById(R.id.textViewTempMed);
                     if (textViewTemp != null){
-                        textViewTemp.setText(medicion.getTemperatura());
+                        textViewTemp.setText(Double.toString(medicion.getTemperatura()));
                     }
                     TextView textViewHum = (TextView) view.findViewById(R.id.textViewHumMed);
                     if (textViewHum != null){
-                        textViewHum.setText(medicion.getHumedad());
+                        textViewHum.setText( Double.toString(medicion.getHumedad()));
                     }
                     TextView textViewLuz = (TextView) view.findViewById(R.id.textViewLuzMed);
                     if (textViewLuz != null){
-                        textViewLuz.setText(medicion.getLuz());
-                    }*/
+                        textViewLuz.setText(Double.toString(medicion.getLuz()));
+                    }
                 }
             }
         });

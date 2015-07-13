@@ -7,13 +7,13 @@ import java.io.Serializable;
  */
 public class Medicion implements Serializable {
     int id;
-    int temperatura;
-    int luz;
-    int humedad;
+    double temperatura;
+    double luz;
+    double humedad;
     String fecha;
 
 
-    public Medicion(int id, int temperatura, int luz, int humedad, String fecha) {
+    public Medicion(int id, double temperatura,  double humedad,double luz, String fecha) {
         this.id = id;
         this.temperatura = temperatura;
         this.luz = luz;
@@ -29,27 +29,27 @@ public class Medicion implements Serializable {
         this.id = id;
     }
 
-    public int getTemperatura() {
+    public double getTemperatura() {
         return temperatura;
     }
 
-    public void setTemperatura(int temperatura) {
+    public void setTemperatura(double temperatura) {
         this.temperatura = temperatura;
     }
 
-    public int getLuz() {
+    public double getLuz() {
         return luz;
     }
 
-    public void setLuz(int luz) {
+    public void setLuz(double luz) {
         this.luz = luz;
     }
 
-    public int getHumedad() {
+    public double getHumedad() {
         return humedad;
     }
 
-    public void setHumedad(int humedad) {
+    public void setHumedad(double humedad) {
         this.humedad = humedad;
     }
 
