@@ -15,6 +15,10 @@ import com.edu.udea.sistemas.esteban.alertas_meteorologicas.db.DBAdapter;
 import com.edu.udea.sistemas.esteban.alertas_meteorologicas.model.Medicion;
 import com.edu.udea.sistemas.esteban.alertas_meteorologicas.util.DataPass;
 import com.edu.udea.sistemas.esteban.alertas_meteorologicas.util.LeerJSON;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.LegendRenderer;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -34,13 +38,38 @@ public class MainActivity extends ActionBarActivity {
     ProgressDialog pDialog;
     ArrayList<Medicion> mediciones= new ArrayList<>();
     Medicion medicion;
-    WebView webViewTemperatura;
+    //WebView webViewTemperatura;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        webViewTemperatura= (WebView) findViewById(R.id.webViewTemp);
-        webViewTemperatura.loadUrl("http://api.thingspeak.com/channels/44075/charts/1?width=450&height=260&results=60&dynamic=true");
+        //webViewTemperatura= (WebView) findViewById(R.id.webViewTemp);
+        //webViewTemperatura.loadUrl("http://api.thingspeak.com/channels/44075/charts/1?width=450&height=260&results=60&dynamic=true");
+        GraphView graph = (GraphView) findViewById(R.id.graph);
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(0, 1),
+                new DataPoint(1, 5),
+                new DataPoint(2, 3),
+                new DataPoint(3, 2),
+                new DataPoint(4, 6)
+        });
+        LineGraphSeries<DataPoint> series2 = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(0, 3),
+                new DataPoint(1, 6),
+                new DataPoint(2, 1),
+                new DataPoint(3, 2),
+                new DataPoint(4, 5)
+        });
+        series.setTitle("ALgo");
+        series2.setTitle("Otro");
+        series.setColor(getResources().getColor(R.color.violet));
+        graph.getLegendRenderer().setVisible(true);
+        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+        graph.setTitle("Medidciones");
+        graph.addSeries(series);
+        graph.addSeries(series2);
+
+
 
     }
 
