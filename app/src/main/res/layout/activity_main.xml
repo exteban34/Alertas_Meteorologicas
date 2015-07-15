@@ -5,24 +5,58 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
 
-    <TextView
+    <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/app_name"
-        android:id="@+id/textView"
-        android:textColor="#ff1b1aff"
-        android:autoText="false"
-        android:elegantTextHeight="false"
-        android:textStyle="bold|italic"
-        android:textAlignment="gravity"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView" >
 
-    <com.jjoe64.graphview.GraphView
-        android:layout_width="match_parent"
-        android:layout_height="200dip"
-        android:id="@+id/graph" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/app_name"
+                android:id="@+id/textView"
+                android:textColor="#ff1b1aff"
+                android:autoText="false"
+                android:elegantTextHeight="false"
+                android:textStyle="bold|italic"
+                android:textAlignment="gravity"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <Space
+                android:layout_width="20px"
+                android:layout_height="20px" />
+
+            <com.jjoe64.graphview.GraphView
+                android:layout_width="match_parent"
+                android:layout_height="200dip"
+                android:id="@+id/temperatureGraph" />
+
+            <Space
+                android:layout_width="20px"
+                android:layout_height="20px" />
+
+            <com.jjoe64.graphview.GraphView
+                android:layout_width="match_parent"
+                android:layout_height="200dip"
+                android:id="@+id/humedadGraph" />
+
+            <Space
+                android:layout_width="20px"
+                android:layout_height="20px" />
+
+            <com.jjoe64.graphview.GraphView
+                android:layout_width="match_parent"
+                android:layout_height="200dip"
+                android:id="@+id/luzGraph" />
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

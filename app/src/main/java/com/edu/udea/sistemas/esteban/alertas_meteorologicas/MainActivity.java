@@ -17,6 +17,7 @@ import com.edu.udea.sistemas.esteban.alertas_meteorologicas.util.DataPass;
 import com.edu.udea.sistemas.esteban.alertas_meteorologicas.util.LeerJSON;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
+import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -29,7 +30,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -38,6 +41,7 @@ public class MainActivity extends ActionBarActivity {
     ProgressDialog pDialog;
     ArrayList<Medicion> mediciones= new ArrayList<>();
     Medicion medicion;
+    GraphView graphTemp,graphHum,graphLuz;
     //WebView webViewTemperatura;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,29 +49,11 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         //webViewTemperatura= (WebView) findViewById(R.id.webViewTemp);
         //webViewTemperatura.loadUrl("http://api.thingspeak.com/channels/44075/charts/1?width=450&height=260&results=60&dynamic=true");
-        GraphView graph = (GraphView) findViewById(R.id.graph);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(0, 1),
-                new DataPoint(1, 5),
-                new DataPoint(2, 3),
-                new DataPoint(3, 2),
-                new DataPoint(4, 6)
-        });
-        LineGraphSeries<DataPoint> series2 = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(0, 3),
-                new DataPoint(1, 6),
-                new DataPoint(2, 1),
-                new DataPoint(3, 2),
-                new DataPoint(4, 5)
-        });
-        series.setTitle("ALgo");
-        series2.setTitle("Otro");
-        series.setColor(getResources().getColor(R.color.violet));
-        graph.getLegendRenderer().setVisible(true);
-        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
-        graph.setTitle("Medidciones");
-        graph.addSeries(series);
-        graph.addSeries(series2);
+        graphTemp = (GraphView) findViewById(R.id.temperatureGraph);
+        graphHum = (GraphView) findViewById(R.id.humedadGraph);
+        graphLuz = (GraphView) findViewById(R.id.luzGraph);
+        new LeerMedicionesVista().execute("http://api.thingspeak.com/channels/44075/feed.json");
+
 
 
 
@@ -159,6 +145,76 @@ public class MainActivity extends ActionBarActivity {
                    Intent e = new Intent("com.edu.udea.sistemas.esteban.alertas_meteorologicas.ListaMediciones");
                     e.putExtra("mediciones", new DataPass(mediciones));
                     startActivity(e);
+
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class LeerMedicionesVista extends AsyncTask<String, Void, String> {
+        protected void onPreExecute() {
+
+        }
+
+        protected String doInBackground(String... urls) {
+            return LeerJSON.leerJSON(urls[0]);
+        }
+
+        protected void onPostExecute(String result) {
+            try {
+
+
+                JSONObject jsonObject= new JSONObject(result);
+                JSONObject jsonObject1;
+                JSONObject jsonchanel = jsonObject.getJSONObject("channel");
+                JSONArray jsonfeeds = jsonObject.getJSONArray("feeds");
+/**                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+              for(int i =(jsonfeeds.length()-1) ; i >=(jsonfeeds.length()-5); i--){
+                    jsonObject1=jsonfeeds.getJSONObject(i);
+                    medicion = new Medicion(jsonObject1.getInt("entry_id"),
+                            jsonObject1.getDouble("field1"),
+                            jsonObject1.getDouble("field2"),
+                            jsonObject1.getDouble("field3"),
+                            jsonObject1.getString("created_at")
+                    );
+
+                }
+             Date date1 = formatter.parse("2015-06-25T21:39:37Z");
+                Date date2 = formatter.parse("2015-06-26T21:39:37Z");
+                Date date3 = formatter.parse("2015-06-30T21:39:37Z");
+                Date date4 = formatter.parse("2015-06-25T22:39:37Z");
+ */
+                LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                        new DataPoint(0,35.3),
+                        new DataPoint(1,30.5),
+                        new DataPoint(2,32.2),
+                        new DataPoint(3,33.4),
+                        new DataPoint(4,34)
+                });
+                LineGraphSeries<DataPoint> series2 = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                        new DataPoint(0, 3),
+                        new DataPoint(1, 6),
+                        new DataPoint(2, 1),
+                        new DataPoint(3, 2),
+                        new DataPoint(4, 5)
+                });
+                StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graphTemp);
+                staticLabelsFormatter.setHorizontalLabels(new String[] {"old", "middle", "new"});
+                graphTemp.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+                series.setTitle("ALgo");
+                series2.setTitle("Otro");
+                series.setColor(getResources().getColor(R.color.peru));
+                graphTemp.getLegendRenderer().setVisible(true);
+                graphTemp.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+                graphTemp.setTitle("Temperatura");
+                graphTemp.setTitleTextSize(24);
+                graphTemp.setTitleColor(getResources().getColor(R.color.maroon));
+                graphTemp.addSeries(series);
+                graphHum.addSeries(series2);
 
 
 
