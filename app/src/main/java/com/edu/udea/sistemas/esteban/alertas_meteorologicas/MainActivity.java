@@ -57,16 +57,6 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    public void clickRegistrarAlerta(View view){
-        Intent intent=new Intent("com.edu.udea.sistemas.esteban.alertas_meteorologicas.RegistroAlerta");
-        startActivity(intent);
-    }
-    public void clickVerAlertas(View view){
-        Intent intent=new Intent("com.edu.udea.sistemas.esteban.alertas_meteorologicas.ListaAlertas");
-        startActivity(intent);
-    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -169,9 +159,9 @@ public class MainActivity extends ActionBarActivity {
                  * Formatters para las labels de los grafos
                  */
                 StaticLabelsFormatter staticLabelsFormatterTemp = new StaticLabelsFormatter(graphTemp);
-                staticLabelsFormatterTemp.setHorizontalLabels(new String[] {"2 Horas", "1 Hora", "Ahora"});
+                staticLabelsFormatterTemp.setHorizontalLabels(new String[] {"2 Horas","1 Hora", "Ahora"});
                 StaticLabelsFormatter staticLabelsFormatterHum = new StaticLabelsFormatter(graphHum);
-                staticLabelsFormatterHum.setHorizontalLabels(new String[] {"2 Horas", "Hace 1 Hora", "Ahora"});
+                staticLabelsFormatterHum.setHorizontalLabels(new String[] {"2 Horas", "1 Hora", "Ahora"});
                 StaticLabelsFormatter staticLabelsFormatterLuz = new StaticLabelsFormatter(graphLuz);
                 staticLabelsFormatterLuz.setHorizontalLabels(new String[] {"2 Horas", "1 Hora", "Ahora"});
 

@@ -14,6 +14,11 @@ public class Alerta {
     private int luzBajo;
     private int luzAlto;
     private String fecha;
+    private String label;
+
+    private  int activa;
+
+
 
     public Alerta(int temperaturaBajo, int temperaturaAlto, int humedadBajo, int humedadAlto, int luzBajo, int luzAlto, String fecha) {
         this.temperaturaBajo = temperaturaBajo;
@@ -23,6 +28,36 @@ public class Alerta {
         this.luzBajo = luzBajo;
         this.luzAlto = luzAlto;
         this.fecha = fecha;
+
+    }
+
+
+    public Alerta(int temperaturaBajo, int temperaturaAlto, int humedadBajo, int humedadAlto, int luzBajo, int luzAlto, String fecha, String label, int activa) {
+        this.temperaturaBajo = temperaturaBajo;
+        this.temperaturaAlto = temperaturaAlto;
+        this.humedadBajo = humedadBajo;
+        this.humedadAlto = humedadAlto;
+        this.luzBajo = luzBajo;
+        this.luzAlto = luzAlto;
+        this.fecha = fecha;
+        this.label = label;
+        this.activa = activa;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public int isActiva() {
+        return activa;
+    }
+
+    public void setActiva(int activa) {
+        this.activa = activa;
     }
 
     public String getFecha() {

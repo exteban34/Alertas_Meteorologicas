@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 import com.edu.udea.sistemas.esteban.alertas_meteorologicas.db.DBAdapter;
 import com.edu.udea.sistemas.esteban.alertas_meteorologicas.model.Alerta;
@@ -20,6 +21,11 @@ public class RegistroAlerta extends Activity {
     EditText edHumedAlto;
     EditText edLuzBajo;
     EditText edLuzAlto;
+    EditText edLabel;
+    RadioButton radioAcvtivar;
+
+    private static final int ENABLE=1;
+    private static final int DISABLE=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,28 +37,44 @@ public class RegistroAlerta extends Activity {
         edHumedAlto = (EditText) findViewById(R.id.edit_text_humed_alto);
         edLuzBajo = (EditText) findViewById(R.id.edit_text_luz_bajo);
         edLuzAlto = (EditText) findViewById(R.id.edit_text_luz_alto);
+        edLabel= (EditText) findViewById(R.id.edit_text_label_alerta);
+        radioAcvtivar= (RadioButton)findViewById(R.id.radioActivar);
+
     }
 
     public void registrar (View view){
         db.open();
-        /**Alerta alerta = new Alerta(Integer.valueOf(edTempBajo.getText().toString()),
-                Integer.valueOf(edTempAlto.getText().toString()),
-                Integer.valueOf(edHumedBajo.getText().toString()),
-                Integer.valueOf(edHumedAlto.getText().toString()),
-                Integer.valueOf(edLuzBajo.getText().toString()),
-                Integer.valueOf(edLuzAlto.getText().toString()),
-                "26/05/2015");
+        if(radioAcvtivar.isChecked()){
+            db.insertarAlerta(Integer.valueOf(edTempBajo.getText().toString()),
+                    Integer.valueOf(edTempAlto.getText().toString()),
+                    Integer.valueOf(edHumedBajo.getText().toString()),
+                    Integer.valueOf(edHumedAlto.getText().toString()),
+                    Integer.valueOf(edLuzBajo.getText().toString()),
+                    Integer.valueOf(edLuzAlto.getText().toString()),
+                    "dd/mm/yyyy",
+                    edLabel.getText().toString(),
+                    ENABLE);
 
-                **/
-        db.insertarAlerta(Integer.valueOf(edTempBajo.getText().toString()),
-                Integer.valueOf(edTempAlto.getText().toString()),
-                Integer.valueOf(edHumedBajo.getText().toString()),
-                Integer.valueOf(edHumedAlto.getText().toString()),
-                Integer.valueOf(edLuzBajo.getText().toString()),
-                Integer.valueOf(edLuzAlto.getText().toString()),
-                "26/05/2015");
+        }else {
+            db.insertarAlerta(Integer.valueOf(edTempBajo.getText().toString()),
+                    Integer.valueOf(edTempAlto.getText().toString()),
+                    Integer.valueOf(edHumedBajo.getText().toString()),
+                    Integer.valueOf(edHumedAlto.getText().toString()),
+                    Integer.valueOf(edLuzBajo.getText().toString()),
+                    Integer.valueOf(edLuzAlto.getText().toString()),
+                    "dd/mm/yyyy",
+                    edLabel.getText().toString(),
+                    DISABLE);
+
+        }
+
         db.close();
         onBackPressed();
+
+    }
+
+    public  void activando(View view){
+        radioAcvtivar.toggle();
 
     }
 }

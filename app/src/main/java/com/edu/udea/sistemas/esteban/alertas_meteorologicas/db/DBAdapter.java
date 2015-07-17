@@ -31,6 +31,8 @@ public class
     static final String LUZ_BAJO = "luz_bajo";
     static final String LUZ_ALTO = "luz_alto";
     static final String FECHA_ALERTA = "fecha";
+    static final String LABEL_ALERTA = "label";
+    static final String ACTIVA= "activa";
 
 
 
@@ -42,7 +44,9 @@ public class
             + "	humed_alto	integer,"
             + "	luz_bajo	integer,"
             + "	luz_alto	integer,"
-            + "	fecha	text"
+            + "	fecha	text,"
+            + "	label	text,"
+            + "	activa	integer"
             + ");";
 
     final Context context;
@@ -94,7 +98,8 @@ public class
     // ---retornar todas las Alertas---
     public ArrayList<Alerta> getTodasAlertas() {
         Cursor c =db.query(TABLA_ALERTAS, new String[] {TEMP_BAJO,TEMP_ALTO,
-                HUMED_BAJO,HUMED_ALTO,LUZ_BAJO,LUZ_ALTO,FECHA_ALERTA,ID_ALERTA
+                HUMED_BAJO,HUMED_ALTO,LUZ_BAJO,LUZ_ALTO,FECHA_ALERTA,ID_ALERTA,
+                LABEL_ALERTA,ACTIVA
         }, null, null, null, null, null);
         ArrayList<Alerta> alertas = new ArrayList<Alerta>();
 
@@ -103,7 +108,7 @@ public class
             do {
                 alerta = new Alerta(Integer.valueOf(c.getString(0)),Integer.valueOf(c.getString(1)),
                         Integer.valueOf(c.getString(2)),Integer.valueOf(c.getString(3)),Integer.valueOf(c.getString(4)),
-                        Integer.valueOf(c.getString(5)),c.getString(6));
+                        Integer.valueOf(c.getString(5)),c.getString(6),c.getString(8),Integer.valueOf(c.getString(9)));
                 alerta.setId(Integer.valueOf(c.getString(7)));
                 alertas.add(alerta);
 
@@ -119,7 +124,8 @@ public class
     public Alerta getAlerta(int id) throws SQLException{
 
         Cursor c =db.query(TABLA_ALERTAS, new String[] {TEMP_BAJO,TEMP_ALTO,
-                HUMED_BAJO,HUMED_ALTO,LUZ_BAJO,LUZ_ALTO,FECHA_ALERTA,ID_ALERTA
+                HUMED_BAJO,HUMED_ALTO,LUZ_BAJO,LUZ_ALTO,FECHA_ALERTA,ID_ALERTA,
+                LABEL_ALERTA,ACTIVA
         }, ID_ALERTA + "=" + id, null, null, null, null);
         if (c != null) {
             c.moveToFirst();
@@ -127,7 +133,7 @@ public class
         }
         alerta = new Alerta(Integer.valueOf(c.getString(0)),Integer.valueOf(c.getString(1)),
                 Integer.valueOf(c.getString(2)),Integer.valueOf(c.getString(3)),Integer.valueOf(c.getString(4)),
-                Integer.valueOf(c.getString(5)),c.getString(6));
+                Integer.valueOf(c.getString(5)),c.getString(6),c.getString(8),Integer.valueOf(c.getString(9)));
         alerta.setId(Integer.valueOf(c.getString(7)));
         return alerta;
     }
@@ -137,7 +143,7 @@ public class
      *
      */
     public void insertarAlerta(int temp_bajo, int temp_alto,int humed_bajo,
-                               int humed_alto, int luz_bajo, int luz_alto,String fecha) {
+                               int humed_alto, int luz_bajo, int luz_alto,String fecha,String label, int activa) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(TEMP_BAJO, temp_bajo);
         initialValues.put(TEMP_ALTO, temp_alto);
@@ -146,6 +152,8 @@ public class
         initialValues.put(LUZ_BAJO, luz_bajo);
         initialValues.put(LUZ_ALTO, luz_alto);
         initialValues.put(FECHA_ALERTA,fecha);
+        initialValues.put(LABEL_ALERTA,label);
+        initialValues.put(ACTIVA,activa);
         db.insert(TABLA_ALERTAS, null, initialValues);
     }
 
@@ -155,7 +163,7 @@ public class
     }
 
     public boolean editarAlerta(int id,int temp_bajo, int temp_alto,int humed_bajo,
-                               int humed_alto, int luz_bajo, int luz_alto,String fecha) {
+                               int humed_alto, int luz_bajo, int luz_alto,String fecha,String label, int activa) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(ID_ALERTA, id);
         initialValues.put(TEMP_BAJO, temp_bajo);
@@ -165,6 +173,8 @@ public class
         initialValues.put(LUZ_BAJO, luz_bajo);
         initialValues.put(LUZ_ALTO, luz_alto);
         initialValues.put(FECHA_ALERTA,fecha);
+        initialValues.put(LABEL_ALERTA,label);
+        initialValues.put(ACTIVA,activa);
         return db.update(TABLA_ALERTAS,initialValues,ID_ALERTA+"="+id,null)>0;
     }
 }

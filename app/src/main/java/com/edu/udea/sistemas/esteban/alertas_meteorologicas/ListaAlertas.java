@@ -39,6 +39,10 @@ public class ListaAlertas extends Activity {
             public void onEntrada(Object entrada, View view) {
                 if (entrada != null) {
                     alerta = (Alerta) entrada;
+                    TextView tvlbl = (TextView) view.findViewById(R.id.tvId);
+                    if (tvlbl != null){
+                        tvlbl.setText(alerta.getLabel());
+                    }
 
                     TextView tvtmp = (TextView) view.findViewById(R.id.tvTemp);
                     if (tvtmp != null){

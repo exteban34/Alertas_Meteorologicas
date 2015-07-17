@@ -16,6 +16,10 @@
     <string name="ver_mediciones">Ver las últimas Mediciones </string>
     <string name="to"> To </string>
     <string name="carga_datos">Cargando Datos</string>
+    <string name="etiqueta">Nombre:     </string>
+    <string name="activar">Activar</string>
+    <string name="on">ON</string>
+    <string name="off">OFF</string>
 
 
 </resources>
