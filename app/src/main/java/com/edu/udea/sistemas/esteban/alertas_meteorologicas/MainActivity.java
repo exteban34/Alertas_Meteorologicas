@@ -39,10 +39,8 @@ public class MainActivity extends ActionBarActivity {
 
     DBAdapter db= new DBAdapter(this);
     ProgressDialog pDialog;
-    ArrayList<Medicion> mediciones= new ArrayList<>();
-    Medicion medicion;
     GraphView graphTemp,graphHum,graphLuz;
-    //WebView webViewTemperatura;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,7 +118,8 @@ public class MainActivity extends ActionBarActivity {
 
         protected void onPostExecute(String result) {
             try {
-
+                ArrayList<Medicion> mediciones= new ArrayList<>();
+                Medicion medicion;
                 pDialog.dismiss();
                 JSONObject jsonObject= new JSONObject(result);
                 JSONObject jsonObject1;
@@ -166,14 +165,31 @@ public class MainActivity extends ActionBarActivity {
 
         protected void onPostExecute(String result) {
             try {
+                /**
+                 * Formatters para las labels de los grafos
+                 */
+                StaticLabelsFormatter staticLabelsFormatterTemp = new StaticLabelsFormatter(graphTemp);
+                staticLabelsFormatterTemp.setHorizontalLabels(new String[] {"2 Horas", "1 Hora", "Ahora"});
+                StaticLabelsFormatter staticLabelsFormatterHum = new StaticLabelsFormatter(graphHum);
+                staticLabelsFormatterHum.setHorizontalLabels(new String[] {"2 Horas", "Hace 1 Hora", "Ahora"});
+                StaticLabelsFormatter staticLabelsFormatterLuz = new StaticLabelsFormatter(graphLuz);
+                staticLabelsFormatterLuz.setHorizontalLabels(new String[] {"2 Horas", "1 Hora", "Ahora"});
 
+                /**
+                 * Arreglos de Datos para graficar
 
+                 DataPoint[] datosTemp=new DataPoint[8];
+                 DataPoint[] datosHum=new DataPoint[8];
+                 DataPoint[] datosLuz=new DataPoint[8];
+                */
+                ArrayList<Medicion> mediciones= new ArrayList<>();
+                Medicion medicion;
                 JSONObject jsonObject= new JSONObject(result);
                 JSONObject jsonObject1;
                 JSONObject jsonchanel = jsonObject.getJSONObject("channel");
                 JSONArray jsonfeeds = jsonObject.getJSONArray("feeds");
-/**                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-              for(int i =(jsonfeeds.length()-1) ; i >=(jsonfeeds.length()-5); i--){
+                int j=0;
+                for(int i =(jsonfeeds.length()-11) ; i <jsonfeeds.length(); i++) {
                     jsonObject1=jsonfeeds.getJSONObject(i);
                     medicion = new Medicion(jsonObject1.getInt("entry_id"),
                             jsonObject1.getDouble("field1"),
@@ -181,40 +197,87 @@ public class MainActivity extends ActionBarActivity {
                             jsonObject1.getDouble("field3"),
                             jsonObject1.getString("created_at")
                     );
-
+                    mediciones.add(medicion);
                 }
-             Date date1 = formatter.parse("2015-06-25T21:39:37Z");
-                Date date2 = formatter.parse("2015-06-26T21:39:37Z");
-                Date date3 = formatter.parse("2015-06-30T21:39:37Z");
-                Date date4 = formatter.parse("2015-06-25T22:39:37Z");
- */
-                LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                        new DataPoint(0,35.3),
-                        new DataPoint(1,30.5),
-                        new DataPoint(2,32.2),
-                        new DataPoint(3,33.4),
-                        new DataPoint(4,34)
+
+
+                /**
+                 * series para los graficos
+                 */
+                LineGraphSeries<DataPoint> serieTemp = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                        new DataPoint(0,mediciones.get(0).getTemperatura()),
+                        new DataPoint(1,mediciones.get(1).getTemperatura()),
+                        new DataPoint(2,mediciones.get(2).getTemperatura()),
+                        new DataPoint(3,mediciones.get(3).getTemperatura()),
+                        new DataPoint(4,mediciones.get(4).getTemperatura()),
+                        new DataPoint(5,mediciones.get(5).getTemperatura()),
+                        new DataPoint(6,mediciones.get(6).getTemperatura()),
+                        new DataPoint(7,mediciones.get(7).getTemperatura()),
+                        new DataPoint(8,mediciones.get(8).getTemperatura()),
+                        new DataPoint(9,mediciones.get(9).getTemperatura()),
+                        new DataPoint(10,mediciones.get(10).getTemperatura())
                 });
-                LineGraphSeries<DataPoint> series2 = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                        new DataPoint(0, 3),
-                        new DataPoint(1, 6),
-                        new DataPoint(2, 1),
-                        new DataPoint(3, 2),
-                        new DataPoint(4, 5)
+                LineGraphSeries<DataPoint> serieHum = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                        new DataPoint(0,mediciones.get(0).getHumedad()),
+                        new DataPoint(1,mediciones.get(1).getHumedad()),
+                        new DataPoint(2,mediciones.get(2).getHumedad()),
+                        new DataPoint(3,mediciones.get(3).getHumedad()),
+                        new DataPoint(4,mediciones.get(4).getHumedad()),
+                        new DataPoint(5,mediciones.get(5).getHumedad()),
+                        new DataPoint(6,mediciones.get(6).getHumedad()),
+                        new DataPoint(7,mediciones.get(7).getHumedad()),
+                        new DataPoint(8,mediciones.get(8).getHumedad()),
+                        new DataPoint(9,mediciones.get(9).getHumedad()),
+                        new DataPoint(10,mediciones.get(10).getHumedad())
                 });
-                StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graphTemp);
-                staticLabelsFormatter.setHorizontalLabels(new String[] {"old", "middle", "new"});
-                graphTemp.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
-                series.setTitle("ALgo");
-                series2.setTitle("Otro");
-                series.setColor(getResources().getColor(R.color.peru));
+                LineGraphSeries<DataPoint> serieLuz = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                        new DataPoint(0,mediciones.get(0).getLuz()),
+                        new DataPoint(1,mediciones.get(1).getLuz()),
+                        new DataPoint(2,mediciones.get(2).getLuz()),
+                        new DataPoint(3,mediciones.get(3).getLuz()),
+                        new DataPoint(4,mediciones.get(4).getLuz()),
+                        new DataPoint(5,mediciones.get(5).getLuz()),
+                        new DataPoint(6,mediciones.get(6).getLuz()),
+                        new DataPoint(7,mediciones.get(7).getLuz()),
+                        new DataPoint(8,mediciones.get(8).getLuz()),
+                        new DataPoint(9,mediciones.get(9).getLuz()),
+                        new DataPoint(10,mediciones.get(10).getLuz())
+                });
+
+                /**
+                 * Asigno las series correspondientes, doy formato  a los graficos
+                  */
+
+                graphTemp.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatterTemp);
+                serieTemp.setTitle("Temperatura");
+                serieTemp.setColor(getResources().getColor(R.color.chocolate));
                 graphTemp.getLegendRenderer().setVisible(true);
                 graphTemp.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
                 graphTemp.setTitle("Temperatura");
-                graphTemp.setTitleTextSize(24);
+                graphTemp.setTitleTextSize(28);
                 graphTemp.setTitleColor(getResources().getColor(R.color.maroon));
-                graphTemp.addSeries(series);
-                graphHum.addSeries(series2);
+                graphTemp.addSeries(serieTemp);
+
+
+                graphHum.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatterHum);
+                serieHum.setTitle("Humedad");
+                serieHum.setColor(getResources().getColor(R.color.dodgerblue));
+                graphHum.getLegendRenderer().setVisible(true);
+                graphHum.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+                graphHum.setTitle("Humedad Relativa");
+                graphHum.setTitleTextSize(28);
+                graphHum.setTitleColor(getResources().getColor(R.color.green));
+                graphHum.addSeries(serieHum);
+
+                graphLuz.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatterLuz);
+                serieLuz.setTitle("Luz");
+                serieLuz.setColor(getResources().getColor(R.color.darkgoldenrod));
+                graphLuz.getLegendRenderer().setVisible(true);
+                graphLuz.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+                graphLuz.setTitle("Intensidad de la Luz");
+                graphLuz.setTitleTextSize(28);
+                graphLuz.setTitleColor(getResources().getColor(R.color.indigo));
+                graphLuz.addSeries(serieLuz);
 
 
 
