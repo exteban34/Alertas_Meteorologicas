@@ -1,8 +1,10 @@
 package com.edu.udea.sistemas.esteban.alertas_meteorologicas;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,6 +63,12 @@ public class ListaMediciones extends Activity {
                     TextView textViewLuz = (TextView) view.findViewById(R.id.textViewLuzMed);
                     if (textViewLuz != null){
                         textViewLuz.setText(Double.toString(medicion.getLuz()));
+                    }
+                    LinearLayout ly = (LinearLayout) view.findViewById(R.id.lyMedicion);
+                    if(medicion.getId()%2==0){
+                        ly.setBackgroundColor(getResources().getColor(R.color.antiquewhite));
+                    }else{
+                        ly.setBackgroundColor(getResources().getColor(R.color.gainsboro));
                     }
                 }
             }

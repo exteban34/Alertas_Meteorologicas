@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.edu.udea.sistemas.esteban.alertas_meteorologicas.db.DBAdapter;
 import com.edu.udea.sistemas.esteban.alertas_meteorologicas.model.Alerta;
@@ -69,6 +70,7 @@ public class RegistroAlerta extends Activity {
         }
 
         db.close();
+        Toast.makeText(this, "Alerta creada correctamente", Toast.LENGTH_SHORT).show();
         onBackPressed();
 
     }

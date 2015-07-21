@@ -15,7 +15,6 @@ public class Alerta {
     private int luzAlto;
     private String fecha;
     private String label;
-
     private  int activa;
 
 
@@ -122,5 +121,9 @@ public class Alerta {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getActiva() {
+        return activa;
     }
 }

@@ -47,6 +47,17 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:label="Edicion de una Alerta"
+            android:name="com.edu.udea.sistemas.esteban.alertas_meteorologicas.EditarAlerta"
+            android:screenOrientation="portrait">
+            <intent-filter >
+                <action android:name="com.edu.udea.sistemas.esteban.alertas_meteorologicas.EditarAlerta" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
