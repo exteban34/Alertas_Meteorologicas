@@ -176,23 +176,32 @@
     </TableLayout>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/actualizar"
         android:id="@+id/buttonActualizar"
         android:onClick="actulizar"
-        android:layout_above="@+id/buttonEliminar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="38dp" />
+        android:background="@color/gainsboro"
+        android:clickable="false"
+        android:layout_below="@+id/tableLayout1"
+        android:layout_marginTop="40dp"
+        android:layout_alignLeft="@+id/tableLayout1"
+        android:layout_alignStart="@+id/tableLayout1"
+        android:layout_alignRight="@+id/tableLayout1"
+        android:layout_alignEnd="@+id/tableLayout1" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/eliminar"
         android:id="@+id/buttonEliminar"
         android:onClick="eliminar"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="44dp" />
+        android:layout_marginBottom="44dp"
+        android:background="@color/gainsboro"
+        android:layout_alignLeft="@+id/buttonActualizar"
+        android:layout_alignStart="@+id/buttonActualizar"
+        android:layout_alignRight="@+id/buttonActualizar"
+        android:layout_alignEnd="@+id/buttonActualizar" />
 
 </RelativeLayout>

@@ -10,12 +10,15 @@
 
     <Button
         android:id="@+id/buttonRegistrar"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:text="@string/registrar"
-        android:onClick="registrar" />
+        android:onClick="registrar"
+        android:layout_marginBottom="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/antiquewhite" />
 
     <TextView
         android:id="@+id/textViewAlerta"
