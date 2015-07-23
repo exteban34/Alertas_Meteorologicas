@@ -106,7 +106,8 @@ public class EditarAlerta extends Activity{
         db.eliminarAlerta(idAlerta);
         db.close();
         Toast.makeText(this,"Alerta eliminada correctamente",Toast.LENGTH_SHORT).show();
-        onBackPressed();
+        Intent i = new Intent("com.edu.udea.sistemas.esteban.alertas_meteorologicas.ListaAlertas");
+        startActivity(i);
 
     }
 

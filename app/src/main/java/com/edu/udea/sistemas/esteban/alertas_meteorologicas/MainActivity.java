@@ -34,6 +34,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import servicios.MiServicio;
+
 
 public class MainActivity extends ActionBarActivity {
 
@@ -51,6 +53,8 @@ public class MainActivity extends ActionBarActivity {
         graphHum = (GraphView) findViewById(R.id.humedadGraph);
         graphLuz = (GraphView) findViewById(R.id.luzGraph);
         new LeerMedicionesVista().execute("http://api.thingspeak.com/channels/44075/feed.json");
+        Intent intent = new Intent(MainActivity.this, MiServicio.class);
+        startService(intent);
 
 
 
