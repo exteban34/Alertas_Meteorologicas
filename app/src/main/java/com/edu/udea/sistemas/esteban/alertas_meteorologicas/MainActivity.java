@@ -7,9 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.webkit.WebView;
-import android.widget.Toast;
+
 
 import com.edu.udea.sistemas.esteban.alertas_meteorologicas.db.DBAdapter;
 import com.edu.udea.sistemas.esteban.alertas_meteorologicas.model.Medicion;
@@ -20,20 +18,9 @@ import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-
 import servicios.MiServicio;
 
 
@@ -47,19 +34,15 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //webViewTemperatura= (WebView) findViewById(R.id.webViewTemp);
-        //webViewTemperatura.loadUrl("http://api.thingspeak.com/channels/44075/charts/1?width=450&height=260&results=60&dynamic=true");
         graphTemp = (GraphView) findViewById(R.id.temperatureGraph);
         graphHum = (GraphView) findViewById(R.id.humedadGraph);
         graphLuz = (GraphView) findViewById(R.id.luzGraph);
         new LeerMedicionesVista().execute("http://api.thingspeak.com/channels/44075/feed.json");
         Intent intent = new Intent(MainActivity.this, MiServicio.class);
         startService(intent);
-
-
-
-
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -159,23 +142,8 @@ public class MainActivity extends ActionBarActivity {
 
         protected void onPostExecute(String result) {
             try {
-                /**
-                 * Formatters para las labels de los grafos
-                 */
-                StaticLabelsFormatter staticLabelsFormatterTemp = new StaticLabelsFormatter(graphTemp);
-                staticLabelsFormatterTemp.setHorizontalLabels(new String[] {"2 Horas","1 Hora", "Ahora"});
-                StaticLabelsFormatter staticLabelsFormatterHum = new StaticLabelsFormatter(graphHum);
-                staticLabelsFormatterHum.setHorizontalLabels(new String[] {"2 Horas", "1 Hora", "Ahora"});
-                StaticLabelsFormatter staticLabelsFormatterLuz = new StaticLabelsFormatter(graphLuz);
-                staticLabelsFormatterLuz.setHorizontalLabels(new String[] {"2 Horas", "1 Hora", "Ahora"});
 
-                /**
-                 * Arreglos de Datos para graficar
 
-                 DataPoint[] datosTemp=new DataPoint[8];
-                 DataPoint[] datosHum=new DataPoint[8];
-                 DataPoint[] datosLuz=new DataPoint[8];
-                */
                 ArrayList<Medicion> mediciones= new ArrayList<>();
                 Medicion medicion;
                 JSONObject jsonObject= new JSONObject(result);
@@ -238,10 +206,20 @@ public class MainActivity extends ActionBarActivity {
                         new DataPoint(10,mediciones.get(10).getLuz())
                 });
 
+
+                /**
+                 * Formatters para las labels de los grafos
+                 */
+                StaticLabelsFormatter staticLabelsFormatterTemp = new StaticLabelsFormatter(graphTemp);
+                staticLabelsFormatterTemp.setHorizontalLabels(new String[] {"2 Horas","1 Hora","Ultima: "+mediciones.get(10).getTemperatura()});
+                StaticLabelsFormatter staticLabelsFormatterHum = new StaticLabelsFormatter(graphHum);
+                staticLabelsFormatterHum.setHorizontalLabels(new String[] {"2 Horas", "1 Hora","Ultima: "+mediciones.get(10).getHumedad()});
+                StaticLabelsFormatter staticLabelsFormatterLuz = new StaticLabelsFormatter(graphLuz);
+                staticLabelsFormatterLuz.setHorizontalLabels(new String[] {"2 Horas", "1 Hora", "Ultima: "+mediciones.get(10).getLuz()});
+
                 /**
                  * Asigno las series correspondientes, doy formato  a los graficos
-                  */
-
+                 */
                 graphTemp.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatterTemp);
                 serieTemp.setTitle("Temperatura");
                 serieTemp.setColor(getResources().getColor(R.color.chocolate));

@@ -87,4 +87,9 @@ public class ListaAlertas extends Activity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent("com.edu.udea.sistemas.esteban.alertas_meteorologicas.MainActivity");
+        startActivity(i);
+    }
 }

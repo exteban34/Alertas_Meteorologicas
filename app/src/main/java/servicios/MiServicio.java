@@ -74,7 +74,7 @@ public class MiServicio extends Service {
 
     private void showNotification(Medicion medicion,Alerta alerta) {
 
-        CharSequence text = alerta.getLabel()+" Detectada"+
+        CharSequence text ="Alerta: "+ alerta.getLabel()+" Detectada"+nl+
                 "se obtubo la siguiente medicion:" + nl +
                 "Temperatura: " + medicion.getTemperatura() + nl +
                 "Humedad: " + medicion.getHumedad() + nl +
@@ -89,7 +89,7 @@ public class MiServicio extends Service {
         PendingIntent contentIntent = PendingIntent.getActivity(this,0, iNotification,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
-        notification.setLatestEventInfo(this, alerta.getLabel()+" Detectada", text, contentIntent);
+        notification.setLatestEventInfo(this,"Alerta: "+ alerta.getLabel()+" Detectada", text, contentIntent);
         notification.defaults |=Notification.DEFAULT_VIBRATE;
         notification.defaults |=Notification.DEFAULT_SOUND;
         mNM.notify(1, notification);
@@ -119,16 +119,17 @@ public class MiServicio extends Service {
         JSONObject jsonObject = new JSONObject(result);
         JSONObject jsonObject1;
         JSONArray jsonfeeds = jsonObject.getJSONArray("feeds");
-
-
-            jsonObject1 = jsonfeeds.getJSONObject(jsonfeeds.length()-1);
+        if(jsonfeeds.length()!=0) {
+            jsonObject1 = jsonfeeds.getJSONObject(jsonfeeds.length() - 1);
             medicion = new Medicion(jsonObject1.getInt("entry_id"),
                     jsonObject1.getDouble("field1"),
                     jsonObject1.getDouble("field2"),
                     jsonObject1.getDouble("field3"),
                     jsonObject1.getString("created_at")
             );
-        return  medicion;
+            return medicion;
+        }
+        return null;
     }
 
     private void comprobar_Alertas() {
@@ -147,7 +148,7 @@ public class MiServicio extends Service {
         db.close();
 
 
-        if (alertas != null) {
+        if (alertas != null && medicion!=null) {
             double t, h, l;
             t = medicion.getTemperatura();
             h = medicion.getHumedad();
